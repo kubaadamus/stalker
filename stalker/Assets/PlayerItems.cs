@@ -22,6 +22,7 @@ public class PlayerItems : MonoBehaviour
 
     void Start()
     {
+        
         makeActive();
         statyczne.wypiszZawartosc(beltItems);
         
@@ -57,10 +58,12 @@ public class PlayerItems : MonoBehaviour
                 hit.transform.SetParent(Belt.transform); // i przyklej go do plecaka
                 hit.transform.gameObject.GetComponent<Rigidbody>().isKinematic = true; // wyłącz fizykę obiektu
                 hit.transform.gameObject.layer = 2; // zmień warstwę fizyki na 2 żeby ignorowało raycasty
+                GetComponent<InventoryUIScript>().updateInventory();
                 return;
             }
         }
            putItemIntoBackpack(hit);
+        GetComponent<InventoryUIScript>().updateInventory();
     } // WEŹ PRZEDMIOT - do paska a jeśli pasek pełen to do plecaka
     public void putItemIntoBackpack(RaycastHit hit)
     {
